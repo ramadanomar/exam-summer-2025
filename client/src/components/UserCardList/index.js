@@ -1,3 +1,3 @@
-import UserCardList from './UserCardList'
+import UserCardList from "./UserCardList";
 
-export default UserCardList 
+export default UserCardList;

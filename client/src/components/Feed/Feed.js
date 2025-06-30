@@ -1,5 +1,5 @@
-import React from 'react'
-import './Feed.css'
+import React from "react";
+import "./Feed.css";
 
 const Feed = () => {
   return (
@@ -9,7 +9,7 @@ const Feed = () => {
         <p>check out world's latest news</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Feed 
+export default Feed;

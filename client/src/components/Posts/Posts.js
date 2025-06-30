@@ -1,5 +1,5 @@
-import React from 'react'
-import './Posts.css'
+import React from "react";
+import "./Posts.css";
 
 const Posts = () => {
   return (
@@ -9,7 +9,7 @@ const Posts = () => {
         <p>organize your posts</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;

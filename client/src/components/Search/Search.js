@@ -1,57 +1,71 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
-import './Search.css'
-import Paginator from '../Paginator/Paginator'
-import UserCardList from '../UserCardList'
-import AppContext from '../../state/AppContext'
+import React, { useState, useContext, useEffect, useRef } from "react";
+import "./Search.css";
+import Paginator from "../Paginator/Paginator";
+import UserCardList from "../UserCardList";
+import AppContext from "../../state/AppContext";
 
 const Search = () => {
-  const globalState = useContext(AppContext)
+  const globalState = useContext(AppContext);
 
-  const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('username')
-  const [sortOrder, setSortOrder] = useState('ASC')
-  const [pageSize, setPageSize] = useState(5)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("username");
+  const [sortOrder, setSortOrder] = useState("ASC");
+  const [pageSize, setPageSize] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [userData, setUserData] = useState([])
-  const [totalCount, setTotalCount] = useState(0)
+  const [userData, setUserData] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    const searchSuccessListener = globalState.users.emitter.addListener('USERS_SEARCH_SUCCESS', () => {
-      setTotalCount(globalState.users.totalCount)
-      setUserData(globalState.users.users)
-    })
+    const searchSuccessListener = globalState.users.emitter.addListener(
+      "USERS_SEARCH_SUCCESS",
+      () => {
+        setTotalCount(globalState.users.totalCount);
+        setUserData(globalState.users.users);
+      }
+    );
 
     return () => {
-      searchSuccessListener.remove()
-      globalState.users.clearUsers()
-    }
-  }, [])
+      searchSuccessListener.remove();
+      globalState.users.clearUsers();
+    };
+  }, []);
 
   useEffect(() => {
-    const subscriptionSuccessListener = globalState.subscriptions.emitter.addListener('SUBSCRIPTION_UPDATE_SUCCESS', () => {
-      handleSearch()
-    })
+    const subscriptionSuccessListener =
+      globalState.subscriptions.emitter.addListener(
+        "SUBSCRIPTION_UPDATE_SUCCESS",
+        () => {
+          handleSearch();
+        }
+      );
 
     return () => {
-      subscriptionSuccessListener.remove()
-    }
-  }, [handleSearch])
+      subscriptionSuccessListener.remove();
+    };
+  }, [handleSearch]);
 
   useEffect(() => {
-    handleSearch()
-  }, [searchTerm, currentPage, pageSize, sortBy, sortOrder])
+    handleSearch();
+  }, [searchTerm, currentPage, pageSize, sortBy, sortOrder]);
 
   function handleSearch() {
-    globalState.users.searchUsers(globalState, searchTerm, currentPage, pageSize, sortBy, sortOrder)
+    globalState.users.searchUsers(
+      globalState,
+      searchTerm,
+      currentPage,
+      pageSize,
+      sortBy,
+      sortOrder
+    );
   }
 
   function handlePageChange(newPage) {
-    setCurrentPage(newPage)
+    setCurrentPage(newPage);
   }
 
   function handlePageSizeChange(newSize) {
-    setPageSize(newSize)
+    setPageSize(newSize);
   }
 
   return (
@@ -80,7 +94,10 @@ const Search = () => {
 
           <div className="option-group">
             <label>Order:</label>
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
               <option value="ASC">Ascending</option>
               <option value="DESC">Descending</option>
             </select>
@@ -88,9 +105,7 @@ const Search = () => {
         </div>
       </div>
 
-      <UserCardList
-        data={userData || []}
-      />
+      <UserCardList data={userData || []} />
 
       <Paginator
         onPageChange={handlePageChange}
@@ -98,7 +113,7 @@ const Search = () => {
         totalRecords={totalCount}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Search 
+export default Search;
