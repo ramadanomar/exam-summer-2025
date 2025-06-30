@@ -5,3 +5,56 @@
   flex-grow: 1;
   gap: 1.5rem;
 }
+
+.subscriptions-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 8px;
+}
+
+.subscription-search-input {
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg-color);
+}
+
+.subscription-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.subscription-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-end;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.option-group select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.option-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
